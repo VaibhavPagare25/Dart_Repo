@@ -5,12 +5,12 @@ class Player{
   final String? pName;
 
   // Constant Constructor
- const Player(this.jerNo, this.pName);
+  const Player(this.jerNo, this.pName);
 
- void info(){
-  print(jerNo);
-  print(pName);
-}
+  void info(){
+    print(jerNo);
+    print(pName);
+  }
 }
 
 void main(){
