@@ -1,0 +1,324 @@
+Constructors
+
+program1
+
+code - 
+class Test{
+  final int x;
+  final int y;
+
+  const Test(this.x, this.y){
+    print("In const constructor");
+  }
+}
+
+void main(){
+  Test obj = Test(10,20);
+  print(obj.x);
+}
+
+Output : -
+ Error: A const constructor can't have a body.
+Try removing either the 'const' keyword or the body. 
+  const Test(this.x, this.y){
+
+Explanation :-
+Here the constant constructor named as Test have body. But constant constructor can't have a body. That's why it is showing a error.
+
+Program2:-
+Code - 
+class Employee {
+  int? empId;
+  String? empName;
+
+  Employee() {}
+  Employee(int empId, String empName) {}
+}
+
+void main() {
+  Employee obj = new Employee();
+}
+
+Output :-
+ Error: 'Employee' is already declared in this scope.
+  Employee(int empId, String empName) {}
+  ^^^^^^^^
+program2.dart:5:3: Context: Previous declaration of 'Employee'.
+  Employee() {}
+  ^^^^^^^^
+program2.dart:10:22: Error: Can't use 'Employee' because it is declared more than once.
+  Employee obj = new Employee();
+
+Explanation:-
+In dart everything is an object therefore we can't assign the same name to the constructor. Here we have assigned the same name to two constructors. To solve this problem we need to use named constructor.
+
+Program3.dart:-
+
+Code:-
+class Demo {
+  final int? x;
+  final String? str;
+
+  const Demo(this.x, this.str);
+}
+
+void main() {
+  Demo obj1 = const Demo(10, "Core2Web");
+  print(obj1.hashCode);
+
+  Demo obj2 = const Demo(10, "Biencaps");
+  print(obj2.hashCode);
+}
+
+Output:-
+624751178
+23450484
+
+Explanation:-
+In this program one constant constructor is written to write a const constructor one must need to declare the variables final. So here final variables are declared. In main method we have created a two constant objects of the Demo class and passed different values to the constructor. Because we have passed different values as an argument to the constructor of two objects the hashCode of two objects are different. But if we have passed same values as an argument to the constructor it will have created only one object to save the memory.
+
+
+Program4.dart :- 
+Code:-
+class Company {
+  int empCount;
+  String compName;
+
+  Company(this.empCount, [this.compName = "Biencaps"]);
+
+  void compInfo() {
+    print(empCount);
+    print(compName);
+  }
+}
+
+void main() {
+  Company obj1 = new Company(100);
+  Company obj2 = new Company(200, "Pubmatic");
+
+  obj1.compInfo();
+  obj2.compInfo();
+}
+
+Output:-
+100
+Biencaps
+200
+Pubmatic
+
+Explanation:-
+In this code we have created one class as Company in that class we have written one constructor with one optional parametor. It means if we didn't pass compName argument to the constructor from main method it will take it as Biencaps and if we pass two arguments then it will print the values that we have passed from the main method.
+
+
+Program5.dart
+Code:-
+class Company {
+  int? x;
+  String? str;
+
+  Company(this.x, {this.str = "Core2Web"});
+
+  void compInfo() {
+    print(x);
+    print(str);
+  }
+}
+
+void main() {
+  Company obj1 = new Company(100);
+  Company obj2 = new Company(200, "Incubator");
+
+  obj1.compInfo();
+  obj2.compInfo();
+}
+
+Output: - 
+Error: Too many positional arguments: 1 allowed, but 2 found.
+Try removing the extra positional arguments.
+  Company obj2 = new Company(200, "Incubator");
+                            ^
+program5.dart:5:3: Context: Found this candidate, but the arguments don't match.
+  Company(this.x, {this.str = "Core2Web"});
+
+Explanation :-
+In this program we have passed a argument from obj2 of Company class to the Company Constructor But in Company construtor we have declared one default value of str so if we passed a value to the str it will give an error because it is deffault parameter.
+
+
+
+Program6.dart:-
+Code:-
+import 'dart:collection';
+
+class Company {
+  int? empCount;
+  String compName;
+
+  Company({this.empCount, this.compName = "Deloitte"});
+
+  void compInfo() {
+    print(empCount);
+    print(compName);
+  }
+}
+
+void main() {
+  Company obj1 = new Company(empCount: 100, compName: "Veritas");
+  Company obj2 = new Company(compName: "Pubmatic", empCount: 200);
+
+  obj1.compInfo();
+  obj2.compInfo();
+}
+
+Output:-
+100
+Veritas
+200
+Pubmatic
+
+Explanation:-
+In this code we have written one class named as Company and created two instances of that class named as obj1 and obj2. In Company class we have written named parameter to the constructor because of that we can pass the argument with the jumbling order and constructor will catch it and program will give the output.
+
+Program7.dart:-
+Code:-
+class Point {
+  int x;
+  int y;
+}
+
+void main() {
+  Poiint obj = Point();
+}
+
+Output:-
+ Error: Field 'x' should be initialized because its type 'int' doesn't allow null.      
+  int x;
+      ^
+program7.dart:3:7: Error: Field 'y' should be initialized because its type 'int' doesn't allow null.      
+  int y;
+
+Explanation:-
+Dart doesn't allow to write declare a variable with no value. we must need to initialize the variables to avoid this we can add null safety to the variable to add null safety we need to wrtie ? after int like int?.
+
+
+
+Program8.dart:
+Code:-
+class Player {
+  int? jerNo;
+  String? pName;
+
+  const Player(this.jerNo, this.pName);
+}
+
+void main() {
+  Player obj = const (45, "Rohit");
+}
+
+Output:-
+Error: A value of type '(int, String)' can't be assigned to a variable of type 'Player'.
+ - 'Player' is from 'program8.dart'.
+  Player obj = const (45, "Rohit");
+                     ^
+program8.dart:5:9: Error: Constructor is marked 'const' so all fields must be final.
+  const Player(this.jerNo, this.pName);
+        ^
+program8.dart:2:8: Context: Field isn't final, but constructor is 'const'.
+  int? jerNo;
+       ^
+program8.dart:3:11: Context: Field isn't final, but constructor is 'const'.
+  String? pName;
+
+Explanation:-
+In this program we have written one class in that class we have written one constant construcor but to write constant constructor out variable must have final. And the declaration of the object created of Player class in main method is wrong.
+
+
+Program9.dart:-
+Code:-
+int a = 10;
+
+class Test {
+  int x = 20;
+  int y = 20;
+  static num z = 30;
+
+  Test(this.x, this.y, this.a);
+
+  void fun() {
+    print(a);
+    print(x);
+    print(y);
+  }
+}
+
+void main() {
+  Test obj = Test(10, 30, 40);
+  obj.fun();
+}
+
+
+Output :- 
+Error: 'a' isn't an instance field of this class.
+  Test(this.x, this.y, this.a)
+
+Explanation:-
+Variable a isn't define in the class.
+
+
+Program10.dart:-
+Code:-
+class Demo {
+  Demo() {
+    print("In Demo");
+  }
+
+  factory Demo() {
+    print("In demo Factory");
+    return Demo();
+  }
+}
+
+void main() {
+  Demo obj = new Demo();
+}
+
+Output:-
+Error: 'Demo' is already declared in this scope.
+  factory Demo() {
+          ^^^^
+program10.dart:2:3: Context: Previous declaration of 'Demo'.
+  Demo() {
+  ^^^^
+program10.dart:8:12: Error: Can't use 'Demo' because it is declared more than once.
+    return Demo();
+           ^
+program10.dart:13:18: Error: Can't use 'Demo' because it is declared more than once.
+  Demo obj = new Demo();
+
+Explanation:-
+In this code we have written two constructors with the same name and in dart everything is a object so it will show error. To solve this error we must need to use named constructor.
+
+
+Program11.dart:-
+Code:-
+class Test {
+  Test._private() {
+    print("In demo");
+  }
+
+  factory Test() {
+    print("In demo factory");
+    return Test._private();
+  }
+}
+
+void main() {
+  Test obj = new Test();
+}
+
+Output:- 
+In demo factory
+In demo
+
+Explanation:-
+In this program we have written one private constructor and one factory constructor. In main we have created one object of Test class it will call the test constructor and print in demo factory and then call the test._private constructor and print in demo return to main method.
+
