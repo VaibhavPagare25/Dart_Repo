@@ -1,4 +1,4 @@
-int a = 10;
+static int a = 10;
 
 class Test {
   int x = 20;
